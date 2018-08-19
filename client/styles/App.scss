@@ -8,3 +8,49 @@
 html, body {
   height: 100%;
 }
+
+.table {
+  width: 1200px;
+  margin: 30px auto 0;
+  &-header, &-item {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+  }
+  &-col {
+    flex-shrink: 0;
+    &:nth-child(1) {
+      width: 15%;
+    }
+    &:nth-child(3) {
+      width: 15%;
+    }
+    &:nth-child(2) {
+      width: 70%;
+    }
+  }
+  &-header {
+    font-size: 18px;
+    font-weight: bold;
+  }
+  &-header &-col {
+    border: 1px solid #777;
+    padding: 5px 10px;
+    &:not(:first-child) {
+      border-left: none;
+    }
+  }
+  &-body {
+    max-height: 600px;
+    overflow-y: scroll;
+  }
+  &-item &-col {
+    padding: 5px 10px;
+  }
+  &-item {
+    cursor: pointer;
+    &:hover {
+      background-color: antiquewhite;
+    }
+  }
+}
