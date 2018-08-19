@@ -9,9 +9,23 @@ html, body {
   height: 100%;
 }
 
+img {
+  max-width: 100%;
+}
+
+pre {
+  background: #eff0f1;
+  padding: 5px;
+}
+
+.main {
+  position: relative;
+}
+
 .table {
   width: 1200px;
-  margin: 30px auto 0;
+  margin: 0 auto;
+  padding-top: 30px;
   &-header, &-item {
     display: flex;
     flex-direction: row;
@@ -52,5 +66,51 @@ html, body {
     &:hover {
       background-color: antiquewhite;
     }
+  }
+}
+
+.modal {
+  position: fixed;
+  width: 960px;
+  background-color: white;
+  left: 50%;
+  top: 50%;
+  margin-left: -480px;
+  box-shadow: 0 0 30px 10px rgba(0, 0, 0, 0.15);
+  padding: 40px;
+  transform: translateY(-50%);
+  z-index: 100;
+  &-close {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    cursor: pointer;
+    color: black;
+    font-size: 25px;
+    height: 30px;
+    width: 30px;
+    text-align: center;
+  }
+  &-title {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  &-body {
+    max-height: 500px;
+    overflow-y: scroll;
+  }
+  &-footer {
+    margin-top: 20px;
+    font-size: 20px;
+  }
+  &-overlay {
+    position: fixed;
+    z-index: 10;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.3);
   }
 }

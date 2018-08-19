@@ -15,6 +15,7 @@ class Table extends Component {
             this.props.list.map((q,i) => (
               <Item 
                 key={i}
+                onClick={() => this.props.openModal(q)}
                 {...q}
               />
             ))
