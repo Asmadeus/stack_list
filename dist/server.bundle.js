@@ -114,40 +114,11 @@ app.get('/', function (req, res) {
   res.send((0, _renderPage.renderPage)());
 });
 
-var server = __webpack_require__(8).createServer(app);
-var io = __webpack_require__(9)(server);
-
-var connectedUsers = {};
-
-io.on('connection', function (socket) {
-
-  var updateUsers = function updateUsers() {
-    io.sockets.emit('users', connectedUsers);
-  };
-
-  socket.on('new user', function (username) {
-    connectedUsers[socket.id] = {
-      username: username
-    };
-    socket.join(username);
-    updateUsers();
-  });
-
-  socket.on('message', function (data) {
-    io.in(data.receiver).in(data.sender).emit('message', data);
-  });
-
-  socket.on('disconnect', function () {
-    delete connectedUsers[socket.id];
-    updateUsers();
-  });
-});
-
-server.listen(process.env.PORT || 8080, function () {
+app.listen(process.env.PORT || 8080, function () {
   return console.log("Listening on port 8080!");
 });
 
-exports.default = server;
+exports.default = app;
 /* WEBPACK VAR INJECTION */}.call(exports, "server"))
 
 /***/ }),
@@ -164,7 +135,7 @@ var isProdMode = process.env.NODE_ENV === 'production';
 var assets = process.env.webpackAssets && JSON.parse(process.env.webpackAssets);
 
 var renderPage = exports.renderPage = function renderPage() {
-  return '\n  <!DOCTYPE html>\n  <html lang="en">\n  <head>\n    <meta charset="UTF-8">\n    <meta name="viewport" content="width=device-width, initial-scale=1.0">\n    <meta http-equiv="X-UA-Compatible" content="ie=edge">\n    ' + (isProdMode ? '<link rel=\'stylesheet\' href=\'' + assets['main.css'] + '\' />' : '') + '\n    <title>React Social Network</title>\n  </head>\n  <body>\n    <div id="root"></div>\n    <script src="' + (isProdMode ? assets['main.js'] : '/main.js') + '"></script>\n    </body>\n  </html>\n';
+  return '\n  <!DOCTYPE html>\n  <html lang="en">\n  <head>\n    <meta charset="UTF-8">\n    <meta name="viewport" content="width=device-width, initial-scale=1.0">\n    <meta http-equiv="X-UA-Compatible" content="ie=edge">\n    ' + (isProdMode ? '<link rel=\'stylesheet\' href=\'' + assets['main.css'] + '\' />' : '') + '\n    <title>Stack List</title>\n  </head>\n  <body>\n    <div id="root"></div>\n    <script src="' + (isProdMode ? assets['main.js'] : '/main.js') + '"></script>\n    </body>\n  </html>\n';
 };
 
 /***/ }),
@@ -231,18 +202,6 @@ module.exports = require("webpack-dev-middleware");
 /***/ (function(module, exports) {
 
 module.exports = require("webpack-hot-middleware");
-
-/***/ }),
-/* 8 */
-/***/ (function(module, exports) {
-
-module.exports = require("http");
-
-/***/ }),
-/* 9 */
-/***/ (function(module, exports) {
-
-module.exports = require("socket.io");
 
 /***/ })
 /******/ ]);

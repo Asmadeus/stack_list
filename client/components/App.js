@@ -4,7 +4,7 @@ import { hot } from 'react-hot-loader';
 import Table from './Table';
 import Modal from './Modal';
 
-const API_URL = 'http://api.stackexchange.com/2.2/questions?order=desc&sort=activity&site=stackoverflow&filter=withbody';
+const API_URL = 'https://api.stackexchange.com/2.2/questions?order=desc&sort=activity&site=stackoverflow&filter=withbody';
 
 export class App extends Component {
 

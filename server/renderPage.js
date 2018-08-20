@@ -9,7 +9,7 @@ export const renderPage = () => `
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     ${isProdMode ? `<link rel='stylesheet' href='${assets['main.css']}' />` : ''}
-    <title>React Social Network</title>
+    <title>Stack List</title>
   </head>
   <body>
     <div id="root"></div>
