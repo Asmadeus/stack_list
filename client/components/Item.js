@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { PropTypes } from 'prop-types';
 
 const Item = ({
   owner,
@@ -14,6 +15,13 @@ const Item = ({
       <div className='table-col'>{date}</div>
     </div>
   )
+}
+
+Item.propTypes = {
+  owner: PropTypes.object,
+  title: PropTypes.string,
+  creation_date: PropTypes.number,
+  onClick: PropTypes.func,
 }
 
 export default Item;

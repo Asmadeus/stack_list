@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { PropTypes } from 'prop-types';
 
 const createHtml = (html) => {
   return {__html: html}
@@ -25,6 +26,13 @@ const Modal = ({
       </div>  
     </React.Fragment>
   )
+}
+
+Modal.propTypes = {
+  link: PropTypes.string,
+  title: PropTypes.string,
+  body: PropTypes.string,
+  close: PropTypes.func,
 }
 
 export default Modal;

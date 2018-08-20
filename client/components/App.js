@@ -1,27 +1,34 @@
 import React, { Component } from 'react';
 import { hot } from 'react-hot-loader';
-import { PropTypes } from 'prop-types';
 
 import Table from './Table';
 import Modal from './Modal';
 
-export class App extends Component {
+const API_URL = 'http://api.stackexchange.com/2.2/questions?order=desc&sort=activity&site=stackoverflow&filter=withbody';
 
-  static propTypes = {
-  }
+export class App extends Component {
 
   state = {
     questions: [],
     modalIsOpen: false,
-    modalProps: {}
+    modalProps: {},
+    page: 1,
+    loading: false,
   }
 
   componentDidMount() {
-    fetch('http://api.stackexchange.com/2.2/questions?order=desc&sort=activity&site=stackoverflow&filter=withbody')
+    this.fetchData(this.state.page);
+  }
+
+  fetchData = (page) => {
+    this.setState({loading: true})
+    fetch(API_URL + `&page=${page}`)
     .then((res) => res.json())
     .then(data => {
-      console.log(data)
-      this.setState({questions: data.items})
+      this.setState({ 
+        questions: this.state.questions.concat(data.items),
+        loading: false
+      })
     })
   }
 
@@ -36,13 +43,26 @@ export class App extends Component {
     this.setState({modalIsOpen: false})
   }
 
+  scrollTable = (e) => {
+    const scrollTop = e.target.scrollTop;
+    const height = e.target.clientHeight;
+    const scrollHeight = e.target.scrollHeight;
+    if (scrollTop + height >= scrollHeight) {
+      const page = this.state.page + 1;
+      this.fetchData(page);
+      this.setState({page})
+    }
+  }
+
   render() {
-    const { questions, modalIsOpen, modalProps } = this.state;
+    const { questions, modalIsOpen, modalProps, loading } = this.state;
     return (
       <main className='main'>
         <Table 
           list={questions}
           openModal={this.openModal}
+          onScroll={this.scrollTable}
+          loading={loading}
         />
         { modalIsOpen &&
           <Modal 
